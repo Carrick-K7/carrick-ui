@@ -1,0 +1,36 @@
+{
+  "name": "@carrick/ui-components",
+  "version": "1.0.0",
+  "description": "Carrick Design System - 通用导航组件库",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^6.0.0",
+    "vue": "^3.4.0"
+  },
+  "keywords": [
+    "carrick",
+    "ui",
+    "components",
+    "navbar",
+    "design-system"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Carrick-K7/carrick-ui.git"
+  }
+}

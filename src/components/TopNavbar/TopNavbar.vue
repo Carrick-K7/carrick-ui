@@ -1,0 +1,476 @@
+<template>
+  <nav class="carrick-top-navbar" :class="{ 'is-scrolled': isScrolled }">
+    <div class="navbar-container">
+      <!-- 左侧：Logo -->
+      <div class="navbar-brand">
+        <a :href="homeLink" class="brand-link">
+          <span class="brand-icon">{{ projectIcon }}</span>
+          <span class="brand-name">Carrick</span>
+          <span class="brand-project">{{ projectName }}</span>
+        </a>
+      </div>
+
+      <!-- 中间：导航链接（各项目自定义） -->
+      <div class="navbar-nav">
+        <a
+          v-for="item in navItems"
+          :key="item.name"
+          :href="item.path"
+          class="nav-link"
+          :class="{ active: isActive(item.path) }"
+          @click.prevent="handleNavClick(item)"
+        >
+          {{ item.label }}
+        </a>
+      </div>
+
+      <!-- 右侧：工具区 -->
+      <div class="navbar-tools">
+        <!-- 搜索（可选） -->
+        <button
+          v-if="showSearch"
+          class="tool-btn search-btn"
+          @click="$emit('search')"
+          title="搜索 (⌘K)"
+        >
+          <span class="tool-icon">🔍</span>
+          <span class="tool-shortcut">⌘K</span>
+        </button>
+
+        <!-- 主题切换（可选） -->
+        <button
+          v-if="showThemeToggle"
+          class="tool-btn theme-btn"
+          @click="$emit('toggle-theme')"
+          :title="isDarkMode ? '切换亮色模式' : '切换暗色模式'"
+        >
+          {{ isDarkMode ? '☀️' : '🌙' }}
+        </button>
+
+        <!-- 自定义工具插槽 -->
+        <slot name="tools"></slot>
+
+        <!-- 用户头像（可选） -->
+        <button
+          v-if="showUser"
+          class="tool-btn user-btn"
+          @click="$emit('user-click')"
+        >
+          <img v-if="userAvatar" :src="userAvatar" class="user-avatar" alt="头像" />
+          <span v-else class="user-icon">👤</span>
+        </button>
+      </div>
+
+      <!-- 移动端汉堡菜单 -->
+      <button class="mobile-menu-btn" @click="isMobileMenuOpen = !isMobileMenuOpen">
+        {{ isMobileMenuOpen ? '✕' : '☰' }}
+      </button>
+    </div>
+
+    <!-- 移动端抽屉菜单 -->
+    <transition name="slide">
+      <div v-if="isMobileMenuOpen" class="mobile-drawer">
+        <div class="drawer-header">
+          <span class="drawer-title">Carrick {{ projectName }}</span>
+          <button class="drawer-close" @click="isMobileMenuOpen = false">✕</button>
+        </div>
+        <nav class="drawer-nav">
+          <a
+            v-for="item in navItems"
+            :key="item.name"
+            :href="item.path"
+            class="drawer-link"
+            :class="{ active: isActive(item.path) }"
+            @click.prevent="handleNavClick(item)"
+          >
+            {{ item.label }}
+          </a>
+        </nav>
+        <div class="drawer-footer">
+          <slot name="mobile-footer"></slot>
+        </div>
+      </div>
+    </transition>
+
+    <!-- 遮罩 -->
+    <div v-if="isMobileMenuOpen" class="mobile-overlay" @click="isMobileMenuOpen = false"></div>
+  </nav>
+</template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const props = defineProps({
+  // 项目名称
+  projectName: {
+    type: String,
+    required: true
+  },
+  // 项目图标（emoji 或字符）
+  projectIcon: {
+    type: String,
+    default: '🎵'
+  },
+  // 首页链接
+  homeLink: {
+    type: String,
+    default: '/'
+  },
+  // 导航项（各项目自定义）
+  navItems: {
+    type: Array,
+    default: () => []
+    // 格式: [{ name: 'dashboard', label: '总览', path: '/' }, ...]
+  },
+  // 当前激活的路径
+  activePath: {
+    type: String,
+    default: ''
+  },
+  // 是否显示搜索按钮
+  showSearch: {
+    type: Boolean,
+    default: true
+  },
+  // 是否显示主题切换
+  showThemeToggle: {
+    type: Boolean,
+    default: true
+  },
+  // 是否显示用户头像
+  showUser: {
+    type: Boolean,
+    default: true
+  },
+  // 用户头像URL
+  userAvatar: {
+    type: String,
+    default: ''
+  },
+  // 是否暗色模式
+  isDarkMode: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const emit = defineEmits(['nav-click', 'search', 'toggle-theme', 'user-click'])
+
+// 移动端菜单状态
+const isMobileMenuOpen = ref(false)
+// 滚动状态
+const isScrolled = ref(false)
+
+// 判断当前导航项是否激活
+const isActive = (path) => {
+  if (!props.activePath) return false
+  return props.activePath === path || props.activePath.startsWith(path + '/')
+}
+
+// 处理导航点击
+const handleNavClick = (item) => {
+  emit('nav-click', item)
+  isMobileMenuOpen.value = false
+}
+
+// 监听滚动
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+</script>
+
+<style scoped>
+.carrick-top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  transition: all 0.2s ease;
+}
+
+.carrick-top-navbar.is-scrolled {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Logo 区域 */
+.navbar-brand {
+  flex-shrink: 0;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 20px;
+}
+
+.brand-name {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: #39C5BB;
+}
+
+.brand-project {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #666;
+}
+
+/* 导航链接 */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: rgba(57, 197, 187, 0.1);
+  color: #333;
+}
+
+.nav-link.active {
+  background: rgba(57, 197, 187, 0.15);
+  color: #39C5BB;
+}
+
+/* 工具区 */
+.navbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+  background: rgba(57, 197, 187, 0.1);
+  color: #333;
+}
+
+.tool-shortcut {
+  font-size: 12px;
+  color: #999;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 移动端 */
+.mobile-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(57, 197, 187, 0.1);
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: white;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.drawer-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.drawer-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.drawer-nav {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.drawer-link {
+  padding: 14px 16px;
+  border-radius: 10px;
+  color: #666;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.drawer-link:hover {
+  background: rgba(57, 197, 187, 0.1);
+  color: #333;
+}
+
+.drawer-link.active {
+  background: rgba(57, 197, 187, 0.15);
+  color: #39C5BB;
+}
+
+.drawer-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
+/* 响应式 */
+@media (max-width: 1023px) {
+  .navbar-container {
+    padding: 0 16px;
+  }
+
+  .navbar-nav {
+    display: none;
+  }
+
+  .tool-shortcut {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .carrick-top-navbar {
+    background: rgba(26, 26, 26, 0.9);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .brand-project {
+    color: #ccc;
+  }
+
+  .nav-link,
+  .tool-btn {
+    color: #ccc;
+  }
+
+  .nav-link:hover,
+  .tool-btn:hover {
+    color: #fff;
+  }
+
+  .mobile-drawer {
+    background: #1a1a1a;
+  }
+
+  .drawer-header,
+  .drawer-footer {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+</style>
