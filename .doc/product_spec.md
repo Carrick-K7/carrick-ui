@@ -126,6 +126,39 @@ transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
 ```
 
+### 图标系统
+
+#### 图标库选择
+**优先使用 Lucide Icons** (<https://lucide.dev>)
+- 简洁、现代的线条风格
+- 与 iOS Human Interface 设计一致
+- 支持 SVG，可自定义颜色
+- 社区活跃，持续更新
+
+#### 使用规范
+```html
+<!-- Lucide 图标示例 - MessageCircle -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+</svg>
+```
+
+#### 图标尺寸
+| 场景 | 尺寸 | 说明 |
+|:---|:---:|:---|
+| 按钮图标 | 16-20px | 配合文字使用 |
+| 导航图标 | 20-24px | 独立显示 |
+| 装饰图标 | 24-32px | 空状态、引导页 |
+| 大图标 | 48-64px | 特色功能展示 |
+
+#### 图标颜色
+- 默认：`currentColor`（继承文字颜色）
+- 激活：`var(--miku-primary)` #39C5BB
+- 禁用：`var(--miku-text-muted)` #8E8E93
+
+---
+
 ### 毛玻璃效果
 ```css
 backdrop-filter: blur(10px);
