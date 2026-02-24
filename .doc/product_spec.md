@@ -151,24 +151,36 @@ background: rgba(255, 255, 255, 0.8);
 
 ## 组件路线图
 
-### v1.0.0（当前）
+### 已发布组件（v1.x）
 - [x] TopNavbar - 顶部导航栏
 - [x] ImmersiveNav - 沉浸导航
+- [x] CButton - 按钮组件
+- [x] CCard - 卡片容器
+- [x] CLogo - Logo 组件
+- [x] CModal - 模态框
+- [x] CBadge - 徽章/状态标签
+- [x] CStatusDot - 状态点
+- [x] CProgress - 进度条
+- [x] CSwitch - 开关
+- [x] CEmpty - 空状态
+- [x] CLoading - 加载
+- [x] CAvatar - 头像
+- [x] CTabs - 标签页
+- [x] BottomTab - 移动端底部标签栏
 
-### v1.1.0（规划中）
-- [ ] Button - 按钮组件
-- [ ] Card - 卡片容器
-- [ ] Icon - 图标系统
+### 规划中（v1.3.0）
+- [ ] CForm - 表单容器
+- [ ] CInput - 输入框
+- [ ] CSelect - 选择器
+- [ ] CCheckbox - 复选框
+- [ ] CRadio - 单选框
+- [ ] CTooltip - 文字提示
 
-### v1.2.0（规划中）
-- [ ] Modal - 弹窗
-- [ ] Form - 表单元素（Input、Select、Checkbox）
-- [ ] Loading - 加载动画
-
-### v2.0.0（远期）
-- [ ] Chart - 图表组件
-- [ ] Table - 数据表格
-- [ ] Timeline - 时间线
+### 远期（v2.0.0）
+- [ ] CTable - 数据表格
+- [ ] CTimeline - 时间线
+- [ ] CPagination - 分页
+- [ ] CTree - 树形控件
 
 ## 发布计划
 
@@ -198,4 +210,5 @@ import { TopNavbar, ImmersiveNav } from '@carrick/ui-components'
 
 ---
 
-*产品规格 v1.0.0 - 2026-02-23*
+*产品规格 v1.2.0 - 2026-02-24*
+*设计系统：iOS Human Interface + 初音美学*
