@@ -54,7 +54,7 @@ defineProps({
 }
 
 .c-logo--md .c-logo__project {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .c-logo--lg .c-logo__brand {
