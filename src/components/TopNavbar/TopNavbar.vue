@@ -4,7 +4,8 @@
       <!-- 左侧：Logo -->
       <div class="navbar-brand">
         <a :href="homeLink" class="brand-link">
-          <CLogo :project="projectName" size="md" />
+          <CLogo variant="circle" :logoSrc="logoSrc" :altText="`${projectName} Logo`" size="md" />
+          <span class="brand-text">{{ projectName }}</span>
         </a>
       </div>
 
@@ -118,6 +119,10 @@ const props = defineProps({
     type: String,
     default: '/'
   },
+  logoSrc: {
+    type: String,
+    default: '/logo/carrick-logo-32x32.png'
+  },
   navItems: {
     type: Array,
     default: () => []
@@ -213,8 +218,16 @@ onUnmounted(() => {
 .brand-link {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   text-decoration: none;
+}
+
+.brand-text {
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--miku-text);
+  letter-spacing: -0.3px;
 }
 
 /* 右侧区域：导航 + 工具 */

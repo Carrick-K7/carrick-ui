@@ -1,8 +1,19 @@
-<template>
-  <div class="c-logo" :class="`c-logo--${size}`">
+<template>  <!-- 圆形图标模式 -->
+  <img
+    v-if="variant === 'circle'"
+    :src="logoSrc"
+    :alt="altText"
+    class="c-logo-circle"
+    :class="`c-logo-circle--${size}`"
+    :width="dimension"
+    :height="dimension"
+  />
+
+  <!-- 文字组合模式 -->
+  <div v-else class="c-logo" :class="`c-logo--${size}`">
     <!-- 初音主题 Logo 图标 -->
     <Music v-if="showIcon" class="c-logo__icon" :size="iconSize" />
-    
+
     <span class="c-logo__brand">Carrick</span>
     <span class="c-logo__project">{{ project }}</span>
   </div>
@@ -15,7 +26,7 @@ import { Music } from 'lucide-vue-next'
 const props = defineProps({
   project: {
     type: String,
-    required: true
+    default: ''
   },
   size: {
     type: String,
@@ -27,6 +38,21 @@ const props = defineProps({
   showIcon: {
     type: Boolean,
     default: false
+  },
+  variant: {
+    type: String,
+    default: 'text', // 'text' | 'circle'
+    validator(value) {
+      return ['text', 'circle'].includes(value)
+    }
+  },
+  logoSrc: {
+    type: String,
+    default: '/logo/carrick-logo-32x32.png'
+  },
+  altText: {
+    type: String,
+    default: 'Carrick Logo'
   }
 })
 
@@ -36,10 +62,41 @@ const iconSizeMap = {
   lg: 32
 }
 
+const dimensionMap = {
+  sm: 24,
+  md: 32,
+  lg: 48
+}
+
 const iconSize = computed(() => iconSizeMap[props.size])
+const dimension = computed(() => dimensionMap[props.size])
 </script>
 
 <style scoped>
+/* ========== 圆形图标样式 ========== */
+.c-logo-circle {
+  display: inline-block;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.c-logo-circle--sm {
+  width: 24px;
+  height: 24px;
+}
+
+.c-logo-circle--md {
+  width: 32px;
+  height: 32px;
+}
+
+.c-logo-circle--lg {
+  width: 48px;
+  height: 48px;
+}
+
+/* ========== 文字组合样式 ========== */
 .c-logo {
   display: inline-flex;
   align-items: center;
@@ -74,7 +131,7 @@ const iconSize = computed(() => iconSizeMap[props.size])
   color: var(--miku-text-secondary);
 }
 
-/* 尺寸定义 */
+/* 尺寸定义 - 文字模式 */
 .c-logo--sm .c-logo__icon {
   width: 20px;
   height: 20px;
