@@ -32,5 +32,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Carrick-K7/carrick-ui.git"
+  },
+  "dependencies": {
+    "naive-ui": "^2.43.2"
   }
 }
