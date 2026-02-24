@@ -65,22 +65,31 @@
       </button>
     </div>
 
-    <!-- 移动端下拉菜单 -->
-    <transition name="dropdown">
-      <div v-if="isMobileMenuOpen" class="mobile-dropdown">
-        <div class="dropdown-overlay" @click="isMobileMenuOpen = false"></div>
-        <nav class="dropdown-nav">
-          <a
-            v-for="(item, index) in navItems"
-            :key="item.name"
-            :href="item.path"
-            class="dropdown-link"
-            :class="{ active: isActive(item.path) }"
-            @click.prevent="handleNavClick(item)"
-          >
-            {{ item.label }}
-          </a>
-        </nav>
+    <!-- 移动端底部 Drawer -->
+    <transition name="drawer">
+      <div v-if="isMobileMenuOpen" class="mobile-drawer-container">
+        <!-- 遮罩 -->
+        <div class="drawer-overlay" @click="isMobileMenuOpen = false"></div>
+        
+        <!-- Drawer -->
+        <div class="mobile-drawer" @touchmove.prevent>
+          <!-- 拖拽指示条 -->
+          <div class="drawer-handle"></div>
+          
+          <!-- 菜单列表 -->
+          <nav class="drawer-nav">
+            <a
+              v-for="item in navItems"
+              :key="item.name"
+              :href="item.path"
+              class="drawer-link"
+              :class="{ active: isActive(item.path) }"
+              @click.prevent="handleNavClick(item); isMobileMenuOpen = false"
+            >
+              {{ item.label }}
+            </a>
+          </nav>
+        </div>
       </div>
     </transition>
   </nav>
@@ -324,73 +333,90 @@ onUnmounted(() => {
   background: rgba(57, 197, 187, 0.1);
 }
 
-/* 移动端下拉菜单 */
-.mobile-dropdown {
+/* 移动端底部 Drawer */
+.mobile-drawer-container {
   position: fixed;
-  top: 56px;
-  left: 0;
-  right: 0;
-  z-index: 1001;
-}
-
-.dropdown-overlay {
-  position: fixed;
-  top: 56px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
   z-index: 1000;
 }
 
-.dropdown-nav {
-  position: relative;
-  z-index: 1001;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--miku-border);
+.drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mobile-drawer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70vh;
+  max-height: 500px;
+  border-radius: 16px 16px 0 0;
+  background: var(--miku-card-bg, #fff);
   display: flex;
   flex-direction: column;
+}
+
+.drawer-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--miku-text-muted, #999);
+  border-radius: 2px;
+  margin: 12px auto;
+}
+
+.drawer-nav {
+  flex: 1;
+  overflow-y: auto;
   padding: 8px 0;
 }
 
-.dropdown-link {
+.drawer-link {
+  display: block;
   padding: 16px 24px;
   font-size: 16px;
-  font-weight: 500;
-  color: var(--miku-text-secondary);
+  color: var(--miku-text);
   text-decoration: none;
-  transition: all 0.2s ease;
   border-bottom: 1px solid var(--miku-border);
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-.dropdown-link:last-child {
+.drawer-link:last-child {
   border-bottom: none;
 }
 
-.dropdown-link:hover,
-.dropdown-link:active {
+.drawer-link:hover,
+.drawer-link:active {
   background: rgba(57, 197, 187, 0.1);
-  color: var(--miku-text);
 }
 
-.dropdown-link.active {
-  background: rgba(57, 197, 187, 0.15);
+.drawer-link.active {
   color: #39C5BB;
+  background: rgba(57, 197, 187, 0.1);
 }
 
-/* 下拉菜单动画 */
-.dropdown-enter-active,
-.dropdown-leave-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+/* Drawer 动画 */
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: opacity 0.3s ease;
 }
 
-.dropdown-enter-from,
-.dropdown-leave-to {
-  transform: translateY(-100%);
+.drawer-enter-from,
+.drawer-leave-to {
   opacity: 0;
+}
+
+.drawer-enter-active .mobile-drawer,
+.drawer-leave-active .mobile-drawer {
+  transition: transform 0.3s ease;
+}
+
+.drawer-enter-from .mobile-drawer,
+.drawer-leave-to .mobile-drawer {
+  transform: translateY(100%);
 }
 
 /* 响应式 */
@@ -424,7 +450,7 @@ onUnmounted(() => {
     background: rgba(26, 26, 26, 0.9);
   }
 
-  .dropdown-nav {
+  .mobile-drawer {
     background: rgba(26, 26, 26, 0.95);
   }
 }

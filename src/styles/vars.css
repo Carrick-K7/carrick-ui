@@ -1,8 +1,15 @@
 /* Carrick UI - CSS 变量定义 */
 :root {
-  /* 主题色 */
-  --miku-primary: #39c5bb;
-  --miku-primary-dark: #2da8a0;
+  /* 主题色 - 初音色系 */
+  --miku-primary: #39C5BB;
+  --miku-primary-hover: #2BA89F;
+  --miku-primary-light: #5DDDD4;
+  
+  /* iOS 标准色 */
+  --miku-success: #34C759;      /* iOS Green */
+  --miku-warning: #FF9500;      /* iOS Orange */
+  --miku-error: #FF3B30;        /* iOS Red */
+  --miku-info: #007AFF;         /* iOS Blue */
   
   /* 亮色模式（默认） */
   --miku-bg: #ffffff;
@@ -13,6 +20,9 @@
   --miku-text-muted: #999999;
   --miku-border: rgba(0, 0, 0, 0.08);
   --miku-shadow: rgba(0, 0, 0, 0.05);
+  
+  /* Switch 暗色/亮色 */
+  --miku-switch-inactive: #E5E5EA;
 }
 
 /* 暗色模式 */
@@ -26,6 +36,9 @@
     --miku-text-muted: #808080;
     --miku-border: rgba(255, 255, 255, 0.1);
     --miku-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Switch 暗色模式 */
+    --miku-switch-inactive: #3A3A3C;
   }
 }
 
@@ -39,4 +52,7 @@
   --miku-text-muted: #808080;
   --miku-border: rgba(255, 255, 255, 0.1);
   --miku-shadow: rgba(0, 0, 0, 0.3);
+  
+  /* Switch 暗色模式 */
+  --miku-switch-inactive: #3A3A3C;
 }
