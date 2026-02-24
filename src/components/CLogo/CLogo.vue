@@ -36,7 +36,7 @@ defineProps({
 
 .c-logo__project {
   color: #666;
-  font-family: 'HarmonyOS Sans', -apple-system, sans-serif;
+  font-family: 'JetBrains Mono', 'Cascadia Code', monospace;
   font-weight: 500;
 }
 
@@ -54,7 +54,7 @@ defineProps({
 }
 
 .c-logo--md .c-logo__project {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .c-logo--lg .c-logo__brand {
