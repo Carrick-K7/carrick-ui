@@ -19,6 +19,7 @@ import CModal from './components/CModal/CModal.vue'
 // 自定义组件（自己实现）
 import TopNavbar from './components/TopNavbar/TopNavbar.vue'
 import ImmersiveNav from './components/ImmersiveNav/ImmersiveNav.vue'
+import CLogo from './components/CLogo/CLogo.vue'
 
 // 导出组件
 export {
@@ -38,6 +39,7 @@ export {
   // Carrick 自定义组件
   TopNavbar,
   ImmersiveNav,
+  CLogo,
   
   // 主题
   carrickTheme,
@@ -54,5 +56,6 @@ export default {
     app.component('CModal', CModal)
     app.component('TopNavbar', TopNavbar)
     app.component('ImmersiveNav', ImmersiveNav)
+    app.component('CLogo', CLogo)
   }
 }
