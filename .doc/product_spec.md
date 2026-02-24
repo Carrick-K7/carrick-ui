@@ -42,9 +42,9 @@ import { Plus } from 'lucide-vue-next'
 
 ## 设计原则
 
-### 核心理念：iOS Human Interface + 初音美学
+### 核心理念：现代极简 + 初音美学
 
-Carrick UI 融合 **Apple iOS Human Interface Guidelines** 的设计哲学与 **初音未来（Hatsune Miku）** 的品牌美学，打造精致、现代、一致的跨平台体验。
+Carrick UI 融合 **现代极简设计原则** 与 **初音未来（Hatsune Miku）** 的品牌美学，打造精致、现代、一致的跨平台体验。设计参考 Linear、Vercel、Notion 等现代 SaaS 产品。
 
 ### 1. 清晰（Clarity）
 - 文字易读、图标明确、留白充足
@@ -168,7 +168,7 @@ transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
 #### 图标库选择
 **优先使用 Lucide Icons** (<https://lucide.dev>)
 - 简洁、现代的线条风格
-- 与 iOS Human Interface 设计一致
+- 与现代极简设计原则一致
 - 支持 SVG，可自定义颜色
 - 社区活跃，持续更新
 
@@ -281,4 +281,4 @@ import { TopNavbar, ImmersiveNav } from '@carrick/ui-components'
 ---
 
 *产品规格 v1.2.0 - 2026-02-24*
-*设计系统：iOS Human Interface + 初音美学*
+*设计系统：现代极简 + 初音美学*
