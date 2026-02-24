@@ -131,10 +131,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-  // 是否显示主题切换
+  // 是否显示主题切换（已废弃，主题切换移到右下角浮动按钮）
   showThemeToggle: {
     type: Boolean,
-    default: true
+    default: false
   },
   // 是否显示用户头像
   showUser: {
@@ -325,6 +325,8 @@ onUnmounted(() => {
   font-size: 20px;
   cursor: pointer;
   border-radius: 8px;
+  z-index: 10;
+  position: relative;
 }
 
 .mobile-menu-btn:hover {
@@ -433,6 +435,10 @@ onUnmounted(() => {
 
   .tool-shortcut {
     display: none;
+  }
+
+  .navbar-tools {
+    margin-right: 8px;
   }
 
   .mobile-menu-btn {
