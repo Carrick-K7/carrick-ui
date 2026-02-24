@@ -1,25 +1,12 @@
-// Carrick UI - 基于 Naive UI 封装的组件库
-import { 
-  NButton, 
-  NCard, 
-  NModal,
-  NInput,
-  NSpace,
-  NConfigProvider
-} from 'naive-ui'
+// Carrick UI - 基于 Tailwind CSS + Lucide Vue 的组件库
+import './index.css'
 
-// CSS 变量
-import './styles/vars.css'
-
-// 主题配置
-import { carrickTheme, carrickThemeDark, carrickThemeConfig } from './theme/carrickTheme.js'
-
-// 基础组件（基于 Naive UI 封装）
+// 基础组件
 import CButton from './components/CButton/CButton.vue'
 import CCard from './components/CCard/CCard.vue'
 import CModal from './components/CModal/CModal.vue'
 
-// 自定义组件（自己实现）
+// 自定义组件
 import TopNavbar from './components/TopNavbar/TopNavbar.vue'
 import ImmersiveNav from './components/ImmersiveNav/ImmersiveNav.vue'
 import CLogo from './components/CLogo/CLogo.vue'
@@ -36,14 +23,6 @@ import CTabs, { CTabPane } from './components/CTabs/index.js'
 
 // 导出组件
 export {
-  // Naive UI 组件（直接导出，方便用户使用）
-  NButton,
-  NCard,
-  NModal,
-  NInput,
-  NSpace,
-  NConfigProvider,
-  
   // Carrick 封装组件
   CButton,
   CCard,
@@ -56,19 +35,14 @@ export {
   CBadge,
   
   // P0 组件 T-112~T-118
-  CStatusDot,   // T-112: 状态点
-  CProgress,    // T-113: 进度条
-  CSwitch,      // T-114: 开关
-  CEmpty,       // T-115: 空状态
-  CLoading,     // T-116: 加载
-  CAvatar,      // T-117: 头像
-  CTabs,        // T-118: 标签页
-  CTabPane,     // T-118: 标签页面板
-  
-  // 主题
-  carrickTheme,
-  carrickThemeDark,
-  carrickThemeConfig
+  CStatusDot,
+  CProgress,
+  CSwitch,
+  CEmpty,
+  CLoading,
+  CAvatar,
+  CTabs,
+  CTabPane
 }
 
 // 默认导出

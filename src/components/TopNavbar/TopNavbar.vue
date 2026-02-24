@@ -31,7 +31,7 @@
           @click="$emit('search')"
           title="搜索 (⌘K)"
         >
-          <span class="tool-icon">🔍</span>
+          <Search class="tool-icon" :size="18" />
           <span class="tool-shortcut">⌘K</span>
         </button>
 
@@ -42,7 +42,8 @@
           @click="$emit('toggle-theme')"
           :title="isDarkMode ? '切换亮色模式' : '切换暗色模式'"
         >
-          {{ isDarkMode ? '☀️' : '🌙' }}
+          <Sun v-if="isDarkMode" :size="18" />
+          <Moon v-else :size="18" />
         </button>
 
         <!-- 自定义工具插槽 -->
@@ -55,13 +56,14 @@
           @click="$emit('user-click')"
         >
           <img v-if="userAvatar" :src="userAvatar" class="user-avatar" alt="头像" />
-          <span v-else class="user-icon">👤</span>
+          <User v-else class="user-icon" :size="20" />
         </button>
       </div>
 
       <!-- 移动端汉堡菜单 -->
       <button class="mobile-menu-btn" @click="isMobileMenuOpen = !isMobileMenuOpen">
-        {{ isMobileMenuOpen ? '✕' : '☰' }}
+        <X v-if="isMobileMenuOpen" :size="20" />
+        <Menu v-else :size="20" />
       </button>
     </div>
 
@@ -97,56 +99,46 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { Search, Sun, Moon, User, Menu, X } from 'lucide-vue-next'
 import CLogo from '../CLogo/CLogo.vue'
 
 const props = defineProps({
-  // 项目名称
   projectName: {
     type: String,
     required: true
   },
-  // 项目图标（emoji 或字符）
   projectIcon: {
     type: String,
     default: '🎵'
   },
-  // 首页链接
   homeLink: {
     type: String,
     default: '/'
   },
-  // 导航项（各项目自定义）
   navItems: {
     type: Array,
     default: () => []
-    // 格式: [{ name: 'dashboard', label: '总览', path: '/' }, ...]
   },
-  // 当前激活的路径
   activePath: {
     type: String,
     default: ''
   },
-  // 是否显示搜索按钮
   showSearch: {
     type: Boolean,
     default: true
   },
-  // 是否显示主题切换（已废弃，主题切换移到右下角浮动按钮）
   showThemeToggle: {
     type: Boolean,
     default: false
   },
-  // 是否显示用户头像
   showUser: {
     type: Boolean,
     default: true
   },
-  // 用户头像URL
   userAvatar: {
     type: String,
     default: ''
   },
-  // 是否暗色模式
   isDarkMode: {
     type: Boolean,
     default: false
@@ -155,24 +147,19 @@ const props = defineProps({
 
 const emit = defineEmits(['nav-click', 'search', 'toggle-theme', 'user-click'])
 
-// 移动端菜单状态
 const isMobileMenuOpen = ref(false)
-// 滚动状态
 const isScrolled = ref(false)
 
-// 判断当前导航项是否激活
 const isActive = (path) => {
   if (!props.activePath) return false
   return props.activePath === path || props.activePath.startsWith(path + '/')
 }
 
-// 处理导航点击
 const handleNavClick = (item) => {
   emit('nav-click', item)
   isMobileMenuOpen.value = false
 }
 
-// 监听滚动
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 10
 }
@@ -225,24 +212,6 @@ onUnmounted(() => {
   align-items: center;
   gap: 6px;
   text-decoration: none;
-}
-
-.brand-icon {
-  font-size: 20px;
-}
-
-.brand-name {
-  font-family: 'Consolas', 'Monaco', monospace;
-  font-size: 20px;
-  font-weight: 700;
-  color: #39C5BB;
-}
-
-.brand-project {
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--miku-text-secondary);
 }
 
 /* 导航链接 */
@@ -322,15 +291,16 @@ onUnmounted(() => {
   height: 40px;
   border: none;
   background: transparent;
-  font-size: 20px;
   cursor: pointer;
   border-radius: 8px;
-  z-index: 10;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  color: var(--miku-text-secondary);
 }
 
 .mobile-menu-btn:hover {
   background: rgba(57, 197, 187, 0.1);
+  color: var(--miku-text);
 }
 
 /* 移动端底部 Drawer */
@@ -439,8 +409,6 @@ onUnmounted(() => {
 
   .mobile-menu-btn {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
 

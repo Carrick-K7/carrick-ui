@@ -11,6 +11,7 @@
     <span class="c-status-dot__indicator">
       <span v-if="pulse" class="c-status-dot__pulse" />
     </span>
+    
     <span v-if="showText" class="c-status-dot__text">
       <slot :status="status">{{ displayText }}</slot>
     </span>

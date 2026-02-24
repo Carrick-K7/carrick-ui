@@ -4,6 +4,9 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [vue()],
+  css: {
+    postcss: './postcss.config.js',
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
@@ -11,11 +14,10 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'esm' : format}.js`
     },
     rollupOptions: {
-      external: ['vue', 'naive-ui'],
+      external: ['vue'],
       output: {
         globals: {
-          vue: 'Vue',
-          'naive-ui': 'naiveUi'
+          vue: 'Vue'
         }
       }
     }

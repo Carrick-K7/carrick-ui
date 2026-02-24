@@ -1,15 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Carrick UI - CSS 变量定义 */
 :root {
   /* 主题色 - 初音色系 */
   --miku-primary: #39C5BB;
   --miku-primary-hover: #2BA89F;
   --miku-primary-light: #5DDDD4;
+  --miku-primary-dark: #2A9E95;
   
   /* iOS 标准色 */
-  --miku-success: #34C759;      /* iOS Green */
-  --miku-warning: #FF9500;      /* iOS Orange */
-  --miku-error: #FF3B30;        /* iOS Red */
-  --miku-info: #007AFF;         /* iOS Blue */
+  --miku-success: #34C759;
+  --miku-warning: #FF9500;
+  --miku-error: #FF3B30;
+  --miku-info: #007AFF;
+  
+  /* 中性色 */
+  --miku-gray-1: #8E8E93;
+  --miku-gray-2: #AEAEB2;
+  --miku-gray-3: #C7C7CC;
   
   /* 亮色模式（默认） */
   --miku-bg: #ffffff;
@@ -24,6 +34,10 @@
   
   /* Switch 暗色/亮色 */
   --miku-switch-inactive: #E5E5EA;
+  
+  /* 字体 */
+  --font-sans: 'HarmonyOS Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Cascadia Code', 'JetBrains Mono', monospace;
 }
 
 /* 暗色模式 */
@@ -39,7 +53,6 @@
     --miku-border: rgba(255, 255, 255, 0.1);
     --miku-shadow: rgba(0, 0, 0, 0.3);
     
-    /* Switch 暗色模式 */
     --miku-switch-inactive: #3A3A3C;
   }
 }
@@ -56,6 +69,32 @@
   --miku-border: rgba(255, 255, 255, 0.1);
   --miku-shadow: rgba(0, 0, 0, 0.3);
   
-  /* Switch 暗色模式 */
   --miku-switch-inactive: #3A3A3C;
+}
+
+/* 基础样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 禁用 tap 高亮 */
+.carrick-no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 触摸反馈 */
+.carrick-active-scale:active {
+  transform: scale(0.98);
+}
+
+/* 聚焦样式 */
+.carrick-focus:focus-visible {
+  outline: 2px solid var(--miku-primary);
+  outline-offset: 2px;
 }

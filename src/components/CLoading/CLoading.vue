@@ -5,9 +5,7 @@
   >
     <slot />
     
-    <transition name="c-loading-fade"
-    @after-leave="handleAfterLeave"
-  >
+    <transition name="c-loading-fade" @after-leave="handleAfterLeave">
       <div
         v-if="shouldShow"
         class="c-loading"
@@ -20,45 +18,13 @@
         <div class="c-loading__content">
           <div class="c-loading__indicator">
             <slot name="indicator">
-              <!-- Spinner -->
-              <svg
+              <!-- Spinner: Lucide Loader2 -->
+              <Loader2
                 v-if="type === 'spinner'"
                 class="c-loading__spinner"
-                :width="indicatorSize"
-                :height="indicatorSize"
-                viewBox="0 0 50 50"
-              >
-                <circle
-                  class="c-loading__spinner-track"
-                  cx="25"
-                  cy="25"
-                  r="20"
-                  fill="none"
-                  stroke="var(--miku-bg-tertiary)"
-                  stroke-width="4"
-                />
-                <circle
-                  class="c-loading__spinner-path"
-                  cx="25"
-                  cy="25"
-                  r="20"
-                  fill="none"
-                  :stroke="indicatorColor"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                  stroke-dasharray="80 120"
-                  transform="rotate(-90 25 25)"
-                >
-                  <animateTransform
-                    attributeName="transform"
-                    type="rotate"
-                    from="0 25 25"
-                    to="360 25 25"
-                    dur="1s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              </svg>
+                :size="indicatorSize"
+                :stroke-width="2"
+              />
               
               <!-- Dots -->
               <div
@@ -115,6 +81,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { Loader2 } from 'lucide-vue-next'
 
 const props = defineProps({
   loading: {
@@ -280,6 +247,17 @@ const handleAfterLeave = () => {
 
 .c-loading--large .c-loading__text {
   font-size: 16px;
+}
+
+/* Spinner */
+.c-loading__spinner {
+  animation: spin 1s linear infinite;
+  color: var(--miku-primary, #39C5BB);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Dots 动画 */

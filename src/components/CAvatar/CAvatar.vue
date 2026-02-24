@@ -31,7 +31,10 @@
       class="c-avatar__fallback"
       :style="fallbackStyle"
     >
-      <slot name="fallback">{{ fallbackText }}</slot>
+      <slot name="fallback">
+        <User v-if="!fallbackText" :size="fallbackIconSize" />
+        <span v-else>{{ fallbackText }}</span>
+      </slot>
     </div>
     
     <span
@@ -45,6 +48,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { User } from 'lucide-vue-next'
 
 const props = defineProps({
   src: {
@@ -107,10 +111,12 @@ const actualSize = computed(() => {
   return sizeMap[props.size] || 40
 })
 
+const fallbackIconSize = computed(() => Math.round(actualSize.value * 0.5))
+
 const fallbackText = computed(() => {
   if (props.fallback) return props.fallback.slice(0, 2).toUpperCase()
   if (props.alt) return props.alt.slice(0, 1).toUpperCase()
-  return '?'
+  return ''
 })
 
 // 样式计算

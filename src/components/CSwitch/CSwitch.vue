@@ -25,32 +25,16 @@
     >
       <div class="c-switch__handle" :style="handleStyle">
         <span v-if="loading" class="c-switch__loading-icon">
-          <svg viewBox="0 0 24 24" width="1em" height="1em">
-            <path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" opacity="0.3"/>
-            <path fill="currentColor" d="M12 2a10 10 0 0 1 10 10h-2a8 8 0 0 0-8-8z">
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 12 12"
-                to="360 12 12"
-                dur="1s"
-                repeatCount="indefinite"
-              />
-            </path>
-          </svg>
+          <Loader2 :size="loadingIconSize" class="c-switch__spinner" />
         </span>
         <span v-else-if="modelValue" class="c-switch__action">
           <slot name="activeAction">
-            <svg v-if="size !== 'small'" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
-              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-            </svg>
+            <Check v-if="size !== 'small'" :size="actionIconSize" />
           </slot>
         </span>
         <span v-else class="c-switch__action">
           <slot name="inactiveAction">
-            <svg v-if="size !== 'small'" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            </svg>
+            <X v-if="size !== 'small'" :size="actionIconSize" />
           </slot>
         </span>
       </div>
@@ -64,6 +48,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { Loader2, Check, X } from 'lucide-vue-next'
 
 const props = defineProps({
   modelValue: {
@@ -107,12 +92,15 @@ const emit = defineEmits(['update:modelValue', 'change'])
 
 // 尺寸配置
 const sizeConfig = {
-  small: { width: 32, height: 18, handle: 14 },
-  medium: { width: 44, height: 24, handle: 20 },
-  large: { width: 56, height: 30, handle: 26 }
+  small: { width: 32, height: 18, handle: 14, icon: 8 },
+  medium: { width: 44, height: 24, handle: 20, icon: 12 },
+  large: { width: 56, height: 30, handle: 26, icon: 16 }
 }
 
 const currentSize = computed(() => sizeConfig[props.size])
+
+const actionIconSize = computed(() => currentSize.value.icon)
+const loadingIconSize = computed(() => currentSize.value.icon + 2)
 
 // 核心区域样式 - iOS 风格
 const coreStyle = computed(() => {
@@ -203,23 +191,21 @@ const handleClick = () => {
   height: 100%;
 }
 
-.c-switch__action svg {
-  width: 65%;
-  height: 65%;
-}
-
 .c-switch__loading-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70%;
-  height: 70%;
-  animation: none;
-}
-
-.c-switch__loading-icon svg {
   width: 100%;
   height: 100%;
+}
+
+.c-switch__spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .c-switch__label {

@@ -7,10 +7,11 @@
       @click="isMenuOpen = !isMenuOpen"
       :style="buttonStyle"
     >
-      <span class="menu-icon">{{ isMenuOpen ? '✕' : menuIcon }}</span>
+      <X v-if="isMenuOpen" :size="24" />
+      <Menu v-else :size="24" />
     </button>
 
-    <!--  radial 菜单 -->
+    <!-- radial 菜单 -->
     <transition name="radial">
       <div v-if="isMenuOpen" class="radial-menu" :class="position">
         <!-- 项目 Logo -->
@@ -40,7 +41,8 @@
           :style="getRadialStyle(navItems.length)"
           @click="$emit('toggle-theme')"
         >
-          <span class="item-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+          <Sun v-if="isDarkMode" :size="20" />
+          <Moon v-else :size="20" />
           <span class="item-label">主题</span>
         </button>
 
@@ -50,7 +52,7 @@
           :style="getRadialStyle(navItems.length + (showThemeToggle ? 1 : 0))"
           @click="goHome"
         >
-          <span class="item-icon">🏠</span>
+          <Home :size="20" />
           <span class="item-label">首页</span>
         </button>
       </div>
@@ -78,66 +80,49 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { Menu, X, Sun, Moon, Home } from 'lucide-vue-next'
 
 const props = defineProps({
-  // 项目名称
   projectName: {
     type: String,
     required: true
   },
-  // 项目图标
   projectIcon: {
     type: String,
     default: '🎵'
   },
-  // 菜单按钮图标
-  menuIcon: {
-    type: String,
-    default: '☰'
-  },
-  // 首页链接
   homeLink: {
     type: String,
     default: '/'
   },
-  // 导航项
   navItems: {
     type: Array,
     default: () => []
-    // 格式: [{ name: 'practice', label: '练习', path: '/practice', icon: '🥁' }, ...]
   },
-  // 当前激活路径
   activePath: {
     type: String,
     default: ''
   },
-  // 按钮位置
   position: {
     type: String,
     default: 'bottom-right'
-    // 可选: 'bottom-right', 'bottom-left', 'top-right', 'top-left'
   },
-  // 是否显示极简顶部条
   showMinimalHeader: {
     type: Boolean,
     default: true
   },
-  // 是否显示主题切换
   showThemeToggle: {
     type: Boolean,
     default: true
   },
-  // 是否显示首页按钮
   showHome: {
     type: Boolean,
     default: true
   },
-  // 是否暗色模式
   isDarkMode: {
     type: Boolean,
     default: false
   },
-  // 按钮偏移
   offsetX: {
     type: Number,
     default: 24
@@ -152,7 +137,6 @@ const emit = defineEmits(['nav-click', 'toggle-theme', 'go-home'])
 
 const isMenuOpen = ref(false)
 
-// 按钮样式
 const buttonStyle = computed(() => {
   const style = {}
   if (props.position.includes('bottom')) {
@@ -168,12 +152,11 @@ const buttonStyle = computed(() => {
   return style
 })
 
-// 计算环形菜单项位置
 const getRadialStyle = (index) => {
   const total = props.navItems.length + (props.showThemeToggle ? 1 : 0) + (props.showHome ? 1 : 0)
-  const radius = 100 // 环形半径
+  const radius = 100
   const angleStep = (2 * Math.PI) / total
-  const angle = index * angleStep - Math.PI / 2 // 从顶部开始
+  const angle = index * angleStep - Math.PI / 2
 
   const x = Math.cos(angle) * radius
   const y = Math.sin(angle) * radius
@@ -218,7 +201,6 @@ const goHome = () => {
   border-radius: 50%;
   background: #39C5BB;
   color: white;
-  font-size: 24px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(57, 197, 187, 0.4);
   transition: all 0.3s ease;
@@ -236,10 +218,6 @@ const goHome = () => {
 .floating-menu-btn.is-open {
   background: rgba(0, 0, 0, 0.8);
   transform: rotate(180deg);
-}
-
-.menu-icon {
-  transition: transform 0.3s ease;
 }
 
 /* 环形菜单 */
@@ -336,6 +314,9 @@ const goHome = () => {
 .item-icon {
   font-size: 20px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-label {
