@@ -17,7 +17,7 @@ export const carrickTheme = {
     primaryColorSuppl: carrickPrimary,
     
     // 字体
-    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+    fontFamily: "'HarmonyOS Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     fontFamilyMono: "'Cascadia Code', 'JetBrains Mono', monospace",
     
     // 圆角

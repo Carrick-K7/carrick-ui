@@ -4,9 +4,7 @@
       <!-- 左侧：Logo -->
       <div class="navbar-brand">
         <a :href="homeLink" class="brand-link">
-          <span class="brand-icon">{{ projectIcon }}</span>
-          <span class="brand-name">Carrick</span>
-          <span class="brand-project">{{ projectName }}</span>
+          <CLogo :project="projectName" size="md" />
         </a>
       </div>
 
@@ -99,6 +97,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import CLogo from '../CLogo/CLogo.vue'
 
 const props = defineProps({
   // 项目名称
@@ -260,7 +259,7 @@ onUnmounted(() => {
   border-radius: 8px;
   color: #666;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   transition: all 0.2s ease;
 }

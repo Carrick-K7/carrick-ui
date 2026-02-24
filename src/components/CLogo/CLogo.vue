@@ -36,32 +36,32 @@ defineProps({
 
 .c-logo__project {
   color: #666;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+  font-family: 'HarmonyOS Sans', -apple-system, sans-serif;
+  font-weight: 500;
 }
 
 /* 尺寸定义 */
 .c-logo--sm .c-logo__brand {
-  font-size: 20px;
+  font-size: 26px;
 }
 
 .c-logo--sm .c-logo__project {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .c-logo--md .c-logo__brand {
-  font-size: 24px;
-}
-
-.c-logo--md .c-logo__project {
-  font-size: 18px;
-}
-
-.c-logo--lg .c-logo__brand {
   font-size: 32px;
 }
 
+.c-logo--md .c-logo__project {
+  font-size: 20px;
+}
+
+.c-logo--lg .c-logo__brand {
+  font-size: 40px;
+}
+
 .c-logo--lg .c-logo__project {
-  font-size: 24px;
+  font-size: 26px;
 }
 </style>
