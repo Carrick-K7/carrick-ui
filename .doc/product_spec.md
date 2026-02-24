@@ -1,7 +1,44 @@
 # Carrick UI - 产品规格文档
 
+## 技术栈
+
+```
+🎨 样式: Tailwind CSS (原子类优先)
+🎭 图标: Lucide Icons (SVG)
+⚡ 构建: Vite
+🎯 框架: Vue 3 + Composition API
+```
+
+**核心原则**: 纯 Tailwind CSS，无 UI 框架依赖
+
+---
+
 ## 产品定位
 Carrick Design System 的官方 UI 组件库，为所有 Carrick 项目提供统一、美观、易用的界面组件。
+
+## 快速开始
+
+### 安装
+```bash
+npm install @carrick/ui-components
+```
+
+### 使用
+```vue
+<template>
+  <CButton variant="primary" @click="handleClick">
+    <Plus class="w-4 h-4 mr-2" />
+    新建任务
+  </CButton>
+</template>
+
+<script setup>
+import { CButton } from '@carrick/ui-components'
+import { Plus } from 'lucide-vue-next'
+</script>
+```
+
+---
 
 ## 设计原则
 
