@@ -53,9 +53,21 @@ defineProps({
 <style scoped>
 .carrick-card {
   transition: all 0.2s ease;
+  background: var(--miku-bg);
+  color: var(--miku-text);
+  border-color: var(--miku-border);
+}
+
+.carrick-card :deep(.n-card__content) {
+  color: var(--miku-text);
+}
+
+.carrick-card :deep(.n-card__header) {
+  color: var(--miku-text);
 }
 
 .carrick-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--miku-shadow);
 }
 </style>

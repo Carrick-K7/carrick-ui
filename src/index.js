@@ -8,6 +8,9 @@ import {
   NConfigProvider
 } from 'naive-ui'
 
+// CSS 变量
+import './styles/vars.css'
+
 // 主题配置
 import { carrickTheme, carrickThemeDark, carrickThemeConfig } from './theme/carrickTheme.js'
 
@@ -20,6 +23,7 @@ import CModal from './components/CModal/CModal.vue'
 import TopNavbar from './components/TopNavbar/TopNavbar.vue'
 import ImmersiveNav from './components/ImmersiveNav/ImmersiveNav.vue'
 import CLogo from './components/CLogo/CLogo.vue'
+import CBadge from './components/CBadge/CBadge.vue'
 
 // 导出组件
 export {
@@ -40,6 +44,7 @@ export {
   TopNavbar,
   ImmersiveNav,
   CLogo,
+  CBadge,
   
   // 主题
   carrickTheme,
@@ -57,5 +62,6 @@ export default {
     app.component('TopNavbar', TopNavbar)
     app.component('ImmersiveNav', ImmersiveNav)
     app.component('CLogo', CLogo)
+    app.component('CBadge', CBadge)
   }
 }

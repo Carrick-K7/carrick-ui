@@ -195,7 +195,7 @@ onUnmounted(() => {
   height: 56px;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--miku-border);
   z-index: 1000;
   transition: all 0.2s ease;
 }
@@ -242,7 +242,7 @@ onUnmounted(() => {
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   font-weight: 400;
-  color: #666;
+  color: var(--miku-text-secondary);
 }
 
 /* 导航链接 */
@@ -257,7 +257,7 @@ onUnmounted(() => {
 .nav-link {
   padding: 8px 16px;
   border-radius: 8px;
-  color: #666;
+  color: var(--miku-text-secondary);
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
@@ -266,7 +266,7 @@ onUnmounted(() => {
 
 .nav-link:hover {
   background: rgba(57, 197, 187, 0.1);
-  color: #333;
+  color: var(--miku-text);
 }
 
 .nav-link.active {
@@ -291,19 +291,19 @@ onUnmounted(() => {
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  color: #666;
+  color: var(--miku-text-secondary);
   transition: all 0.2s ease;
 }
 
 .tool-btn:hover {
   background: rgba(57, 197, 187, 0.1);
-  color: #333;
+  color: var(--miku-text);
 }
 
 .tool-shortcut {
   font-size: 12px;
-  color: #999;
-  background: rgba(0, 0, 0, 0.05);
+  color: var(--miku-text-muted);
+  background: var(--miku-bg-secondary);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -339,7 +339,7 @@ onUnmounted(() => {
   left: 0;
   bottom: 0;
   width: 280px;
-  background: white;
+  background: var(--miku-bg);
   z-index: 1001;
   display: flex;
   flex-direction: column;
@@ -351,12 +351,13 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--miku-border);
 }
 
 .drawer-title {
   font-size: 16px;
   font-weight: 600;
+  color: var(--miku-text);
 }
 
 .drawer-close {
@@ -381,7 +382,7 @@ onUnmounted(() => {
 .drawer-link {
   padding: 14px 16px;
   border-radius: 10px;
-  color: #666;
+  color: var(--miku-text-secondary);
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
@@ -390,7 +391,7 @@ onUnmounted(() => {
 
 .drawer-link:hover {
   background: rgba(57, 197, 187, 0.1);
-  color: #333;
+  color: var(--miku-text);
 }
 
 .drawer-link.active {
@@ -400,7 +401,7 @@ onUnmounted(() => {
 
 .drawer-footer {
   padding: 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--miku-border);
 }
 
 .mobile-overlay {
@@ -452,30 +453,6 @@ onUnmounted(() => {
 @media (prefers-color-scheme: dark) {
   .carrick-top-navbar {
     background: rgba(26, 26, 26, 0.9);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .brand-project {
-    color: #ccc;
-  }
-
-  .nav-link,
-  .tool-btn {
-    color: #ccc;
-  }
-
-  .nav-link:hover,
-  .tool-btn:hover {
-    color: #fff;
-  }
-
-  .mobile-drawer {
-    background: #1a1a1a;
-  }
-
-  .drawer-header,
-  .drawer-footer {
-    border-color: rgba(255, 255, 255, 0.1);
   }
 }
 </style>
