@@ -15,6 +15,7 @@
   --miku-bg: #ffffff;
   --miku-bg-secondary: #f5f5f5;
   --miku-bg-tertiary: #f0f0f0;
+  --miku-card-bg: #ffffff;
   --miku-text: #333333;
   --miku-text-secondary: #666666;
   --miku-text-muted: #999999;
@@ -31,6 +32,7 @@
     --miku-bg: #1a1a1a;
     --miku-bg-secondary: #2d2d2d;
     --miku-bg-tertiary: #404040;
+    --miku-card-bg: #2d2d2d;
     --miku-text: #e0e0e0;
     --miku-text-secondary: #b0b0b0;
     --miku-text-muted: #808080;
@@ -47,6 +49,7 @@
   --miku-bg: #1a1a1a;
   --miku-bg-secondary: #2d2d2d;
   --miku-bg-tertiary: #404040;
+  --miku-card-bg: #2d2d2d;
   --miku-text: #e0e0e0;
   --miku-text-secondary: #b0b0b0;
   --miku-text-muted: #808080;
