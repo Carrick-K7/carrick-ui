@@ -65,33 +65,24 @@
       </button>
     </div>
 
-    <!-- 移动端抽屉菜单 -->
-    <transition name="slide">
-      <div v-if="isMobileMenuOpen" class="mobile-drawer">
-        <div class="drawer-header">
-          <span class="drawer-title">Carrick {{ projectName }}</span>
-          <button class="drawer-close" @click="isMobileMenuOpen = false">✕</button>
-        </div>
-        <nav class="drawer-nav">
+    <!-- 移动端下拉菜单 -->
+    <transition name="dropdown">
+      <div v-if="isMobileMenuOpen" class="mobile-dropdown">
+        <div class="dropdown-overlay" @click="isMobileMenuOpen = false"></div>
+        <nav class="dropdown-nav">
           <a
-            v-for="item in navItems"
+            v-for="(item, index) in navItems"
             :key="item.name"
             :href="item.path"
-            class="drawer-link"
+            class="dropdown-link"
             :class="{ active: isActive(item.path) }"
             @click.prevent="handleNavClick(item)"
           >
             {{ item.label }}
           </a>
         </nav>
-        <div class="drawer-footer">
-          <slot name="mobile-footer"></slot>
-        </div>
       </div>
     </transition>
-
-    <!-- 遮罩 -->
-    <div v-if="isMobileMenuOpen" class="mobile-overlay" @click="isMobileMenuOpen = false"></div>
   </nav>
 </template>
 
@@ -333,80 +324,18 @@ onUnmounted(() => {
   background: rgba(57, 197, 187, 0.1);
 }
 
-.mobile-drawer {
+/* 移动端下拉菜单 */
+.mobile-dropdown {
   position: fixed;
-  top: 0;
+  top: 56px;
   left: 0;
-  bottom: 0;
-  width: 280px;
-  background: var(--miku-bg);
+  right: 0;
   z-index: 1001;
-  display: flex;
-  flex-direction: column;
 }
 
-.drawer-header {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  border-bottom: 1px solid var(--miku-border);
-}
-
-.drawer-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--miku-text);
-}
-
-.drawer-close {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.drawer-nav {
-  flex: 1;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  overflow-y: auto;
-}
-
-.drawer-link {
-  padding: 14px 16px;
-  border-radius: 10px;
-  color: var(--miku-text-secondary);
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.drawer-link:hover {
-  background: rgba(57, 197, 187, 0.1);
-  color: var(--miku-text);
-}
-
-.drawer-link.active {
-  background: rgba(57, 197, 187, 0.15);
-  color: #39C5BB;
-}
-
-.drawer-footer {
-  padding: 16px;
-  border-top: 1px solid var(--miku-border);
-}
-
-.mobile-overlay {
+.dropdown-overlay {
   position: fixed;
-  top: 0;
+  top: 56px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -414,14 +343,54 @@ onUnmounted(() => {
   z-index: 1000;
 }
 
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease;
+.dropdown-nav {
+  position: relative;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--miku-border);
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
 }
 
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateX(-100%);
+.dropdown-link {
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--miku-text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--miku-border);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dropdown-link:last-child {
+  border-bottom: none;
+}
+
+.dropdown-link:hover,
+.dropdown-link:active {
+  background: rgba(57, 197, 187, 0.1);
+  color: var(--miku-text);
+}
+
+.dropdown-link.active {
+  background: rgba(57, 197, 187, 0.15);
+  color: #39C5BB;
+}
+
+/* 下拉菜单动画 */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 /* 响应式 */
@@ -453,6 +422,10 @@ onUnmounted(() => {
 @media (prefers-color-scheme: dark) {
   .carrick-top-navbar {
     background: rgba(26, 26, 26, 0.9);
+  }
+
+  .dropdown-nav {
+    background: rgba(26, 26, 26, 0.95);
   }
 }
 </style>
