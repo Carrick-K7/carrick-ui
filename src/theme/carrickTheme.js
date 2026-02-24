@@ -1,13 +1,14 @@
-// Carrick Design System - 基于 Naive UI 主题配置
-import { createTheme } from 'naive-ui'
+// Carrick Design System - Naive UI 主题覆盖配置
+// 注意：不要使用 createTheme，它只接受 string 或 array 参数
+// 我们直接导出主题覆盖对象
 
 // Carrick 品牌色
 const carrickPrimary = '#39C5BB'
 const carrickPrimaryHover = '#2ba89f'
 const carrickPrimaryPressed = '#248b84'
 
-// 创建 Carrick 主题
-export const carrickTheme = createTheme({
+// 亮色主题覆盖
+export const carrickTheme = {
   common: {
     // 品牌色
     primaryColor: carrickPrimary,
@@ -69,11 +70,10 @@ export const carrickTheme = createTheme({
     borderRadius: '16px',
     boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
   },
-})
+}
 
-// 暗色模式主题
-export const carrickThemeDark = createTheme({
-  ...carrickTheme,
+// 暗色主题覆盖
+export const carrickThemeDark = {
   common: {
     ...carrickTheme.common,
     textColorBase: '#ffffff',
@@ -86,12 +86,15 @@ export const carrickThemeDark = createTheme({
     boxShadow1: '0 1px 2px rgba(0, 0, 0, 0.2)',
     boxShadow2: '0 4px 12px rgba(0, 0, 0, 0.3)',
     boxShadow3: '0 8px 24px rgba(0, 0, 0, 0.4)',
-  }
-})
+  },
+  Button: carrickTheme.Button,
+  Card: carrickTheme.Card,
+  Input: carrickTheme.Input,
+  Modal: carrickTheme.Modal,
+}
 
-// 主题配置对象（供 app.use）
+// 主题配置对象（供 NConfigProvider 使用）
 export const carrickThemeConfig = {
-  theme: carrickTheme,
   themeOverrides: {
     common: {
       primaryColor: carrickPrimary,

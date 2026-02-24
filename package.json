@@ -2,9 +2,16 @@
   "name": "@carrick/ui-components",
   "version": "1.0.0",
   "description": "Carrick Design System - 通用导航组件库",
-  "main": "dist/index.js",
+  "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./dist/ui-components.css": "./dist/ui-components.css"
+  },
   "files": [
     "dist",
     "src"
