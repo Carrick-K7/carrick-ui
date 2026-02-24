@@ -8,56 +8,59 @@
         </a>
       </div>
 
-      <!-- 中间：导航链接（各项目自定义） -->
-      <div class="navbar-nav">
-        <a
-          v-for="item in navItems"
-          :key="item.name"
-          :href="item.path"
-          class="nav-link"
-          :class="{ active: isActive(item.path) }"
-          @click.prevent="handleNavClick(item)"
-        >
-          {{ item.label }}
-        </a>
-      </div>
+      <!-- 右侧：导航 + 工具 -->
+      <div class="navbar-right">
+        <!-- 导航链接 -->
+        <div class="navbar-nav">
+          <a
+            v-for="item in navItems"
+            :key="item.name"
+            :href="item.path"
+            class="nav-link"
+            :class="{ active: isActive(item.path) }"
+            @click.prevent="handleNavClick(item)"
+          >
+            {{ item.label }}
+          </a>
+        </div>
 
-      <!-- 右侧：工具区 -->
-      <div class="navbar-tools">
-        <!-- 搜索（可选） -->
-        <button
-          v-if="showSearch"
-          class="tool-btn search-btn"
-          @click="$emit('search')"
-          title="搜索 (⌘K)"
-        >
-          <Search class="tool-icon" :size="18" />
-          <span class="tool-shortcut">⌘K</span>
-        </button>
+        <!-- 工具区 -->
+        <div class="navbar-tools">
+          <!-- 搜索（可选） -->
+          <button
+            v-if="showSearch"
+            class="tool-btn search-btn"
+            @click="$emit('search')"
+            title="搜索 (⌘K)"
+          >
+            <Search class="tool-icon" :size="18" />
+            <span class="tool-shortcut">⌘K</span>
+          </button>
 
-        <!-- 主题切换（可选） -->
-        <button
-          v-if="showThemeToggle"
-          class="tool-btn theme-btn"
-          @click="$emit('toggle-theme')"
-          :title="isDarkMode ? '切换亮色模式' : '切换暗色模式'"
-        >
-          <Sun v-if="isDarkMode" :size="18" />
-          <Moon v-else :size="18" />
-        </button>
+          <!-- 主题切换（可选） -->
+          <button
+            v-if="showThemeToggle"
+            class="tool-btn theme-btn"
+            @click="$emit('toggle-theme')"
+            :title="isDarkMode ? '切换亮色模式' : '切换暗色模式'"
+          >
+            <Sun v-if="isDarkMode" :size="18" />
+            <Moon v-else :size="18" />
+          </button>
 
-        <!-- 自定义工具插槽 -->
-        <slot name="tools"></slot>
+          <!-- 自定义工具插槽 -->
+          <slot name="tools"></slot>
 
-        <!-- 用户头像（可选） -->
-        <button
-          v-if="showUser"
-          class="tool-btn user-btn"
-          @click="$emit('user-click')"
-        >
-          <img v-if="userAvatar" :src="userAvatar" class="user-avatar" alt="头像" />
-          <User v-else class="user-icon" :size="20" />
-        </button>
+          <!-- 用户头像（可选） -->
+          <button
+            v-if="showUser"
+            class="tool-btn user-btn"
+            @click="$emit('user-click')"
+          >
+            <img v-if="userAvatar" :src="userAvatar" class="user-avatar" alt="头像" />
+            <User v-else class="user-icon" :size="20" />
+          </button>
+        </div>
       </div>
 
       <!-- 移动端汉堡菜单 -->
@@ -214,13 +217,18 @@ onUnmounted(() => {
   text-decoration: none;
 }
 
+/* 右侧区域：导航 + 工具 */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 /* 导航链接 */
 .navbar-nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 1;
-  justify-content: center;
 }
 
 .nav-link {
@@ -395,16 +403,8 @@ onUnmounted(() => {
     padding: 0 16px;
   }
 
-  .navbar-nav {
+  .navbar-right {
     display: none;
-  }
-
-  .tool-shortcut {
-    display: none;
-  }
-
-  .navbar-tools {
-    margin-right: 8px;
   }
 
   .mobile-menu-btn {
