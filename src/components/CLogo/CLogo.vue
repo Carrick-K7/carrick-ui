@@ -42,26 +42,26 @@ defineProps({
 
 /* 尺寸定义 */
 .c-logo--sm .c-logo__brand {
-  font-size: 26px;
+  font-size: 24px;
 }
 
 .c-logo--sm .c-logo__project {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .c-logo--md .c-logo__brand {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .c-logo--md .c-logo__project {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .c-logo--lg .c-logo__brand {
-  font-size: 40px;
+  font-size: 36px;
 }
 
 .c-logo--lg .c-logo__project {
-  font-size: 26px;
+  font-size: 24px;
 }
 </style>
