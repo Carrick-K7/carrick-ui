@@ -22,6 +22,9 @@ import CAvatar from './components/CAvatar/CAvatar.vue'
 import CTabs, { CTabPane } from './components/CTabs/index.js'
 import CVersionInfo from './components/CVersionInfo/CVersionInfo.vue'
 
+// T-145 CDrawer 通用抽屉组件
+import CDrawer from './components/CDrawer/CDrawer.vue'
+
 // 导出组件
 export {
   // Carrick 封装组件
@@ -44,7 +47,10 @@ export {
   CAvatar,
   CTabs,
   CTabPane,
-  CVersionInfo
+  CVersionInfo,
+  
+  // T-145 CDrawer
+  CDrawer
 }
 
 // 默认导出
@@ -69,5 +75,8 @@ export default {
     app.component('CTabs', CTabs)
     app.component('CTabPane', CTabPane)
     app.component('CVersionInfo', CVersionInfo)
+    
+    // T-145 CDrawer
+    app.component('CDrawer', CDrawer)
   }
 }
