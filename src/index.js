@@ -20,6 +20,7 @@ import CEmpty from './components/CEmpty/CEmpty.vue'
 import CLoading from './components/CLoading/CLoading.vue'
 import CAvatar from './components/CAvatar/CAvatar.vue'
 import CTabs, { CTabPane } from './components/CTabs/index.js'
+import CVersionInfo from './components/CVersionInfo/CVersionInfo.vue'
 
 // 导出组件
 export {
@@ -42,7 +43,8 @@ export {
   CLoading,
   CAvatar,
   CTabs,
-  CTabPane
+  CTabPane,
+  CVersionInfo
 }
 
 // 默认导出
@@ -66,5 +68,6 @@ export default {
     app.component('CAvatar', CAvatar)
     app.component('CTabs', CTabs)
     app.component('CTabPane', CTabPane)
+    app.component('CVersionInfo', CVersionInfo)
   }
 }
