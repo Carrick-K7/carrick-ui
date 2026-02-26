@@ -25,6 +25,9 @@ import CVersionInfo from './components/CVersionInfo/CVersionInfo.vue'
 // T-145 CDrawer 通用抽屉组件
 import CDrawer from './components/CDrawer/CDrawer.vue'
 
+// T-166 DeploymentBadge 部署信息组件
+import DeploymentBadge from './components/DeploymentBadge/DeploymentBadge.vue'
+
 // 导出组件
 export {
   // Carrick 封装组件
@@ -50,7 +53,10 @@ export {
   CVersionInfo,
   
   // T-145 CDrawer
-  CDrawer
+  CDrawer,
+  
+  // T-166 DeploymentBadge
+  DeploymentBadge
 }
 
 // 默认导出
@@ -78,5 +84,8 @@ export default {
     
     // T-145 CDrawer
     app.component('CDrawer', CDrawer)
+    
+    // T-166 DeploymentBadge
+    app.component('DeploymentBadge', DeploymentBadge)
   }
 }
